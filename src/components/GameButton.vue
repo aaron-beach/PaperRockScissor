@@ -1,18 +1,17 @@
 <template>
   <div class="button">
-    <ul v-bind:class="active" v-on:click.prevent>
-      <button href="#" class="home" v-on:click="makeActive('home')">
-        Refresh
-      </button>
-      <button href="#" class="rock" v-on:click="makeActive('rock')">
+    <h1 class="game-wins">Wins: {{ wins }}</h1>
+    <h1 class="game-loses">Loses: {{ loses }}</h1>
+    <div v-bind:class="active" v-on:click.prevent>
+      <button class="rock game-btn" v-on:click="makeActive('rock')">
         Rock
         <img src="@/assets/rock.png" alt="rock image" class="rock-image" />
       </button>
-      <button href="#" class="paper" v-on:click="makeActive('paper')">
+      <button class="paper game-btn" v-on:click="makeActive('paper')">
         Paper
         <img src="@/assets/paper.png" alt="paper image" class="paper-image" />
       </button>
-      <button href="#" class="scissors" v-on:click="makeActive('scissors')">
+      <button class="scissors game-btn" v-on:click="makeActive('scissors')">
         Scissors
         <img
           src="@/assets/scissors.png"
@@ -20,76 +19,85 @@
           class="scissors-image"
         />
       </button>
-    </ul>
-    <h2 class="button-selection">{{ active }} {{ winner }}</h2>
+    </div>
+    <h1 v-if="opponent != 'home'">I choose {{ opponent }}</h1>
+    <h2 v-if="winner">{{ active }}! You Win!</h2>
+    <h2 v-if="loser">{{ active }}. You Lose!</h2>
+    <h2 v-if="tied">You Tied!</h2>
   </div>
 </template>
 
 <script>
 export default {
   name: "GameButton",
-  props: {
-    selectedWeapon: {
-      type: String,
-      required: true,
-      validator: function(value) {
-        return ["paper", "rock", "scissors"].indexOf(value) !== -1;
-      }
-    }
-  },
   data() {
     return {
       active: "Pick your weapon!",
-      choices: ["paper", "rock", "scissors"],
+      choices: ["rock", "paper", "scissors"],
       opponent: "home",
-      winner: false
+      winner: false,
+      loser: false,
+      tied: false,
+      wins: 0,
+      loses: 0
     };
   },
   methods: {
     makeActive: function(item) {
       // When a model is changed, the view will be automatically updated.
       this.active = item;
-      this.winner = this.isWinner();
+      this.loser = false;
+      this.tied = false;
+      this.winner = false;
+      this.randomChoice();
+      this.isWinner();
     },
     isWinner: function() {
       if (this.opponent == this.active) {
-        return false;
+        this.tied = true;
       } else if (
         this.opponent == this.choices[0] &&
         this.active == this.choices[1]
       ) {
-        return true;
+        this.winner = true;
+        this.wins++;
       } else if (
         this.opponent == this.choices[1] &&
         this.active == this.choices[2]
       ) {
-        return true;
+        this.winner = true;
+        this.wins++;
       } else if (
         this.opponent == this.choices[2] &&
         this.active == this.choices[0]
       ) {
-        return true;
+        this.winner = true;
+        this.wins++;
       } else {
-        return false;
+        this.loser = true;
+        this.loses++;
       }
+    },
+    randomChoice: function() {
+      let randomIndex = Math.floor(Math.random() * 2);
+      this.opponent = this.choices[randomIndex];
     }
-  },
-  updated() {
-    let randomIndex = Math.floor(Math.random() * 2);
-    this.opponent = this.choices[randomIndex];
   }
 };
 </script>
 
 <style scoped>
-.button {
-  width: 80%;
-  height: 200px;
+.game-btn {
+  border-radius: 100%;
+  width: fit-content;
+  outline: none;
+  border: none;
 }
 .rock-image,
 .scissors-image,
 .paper-image {
   width: 200px;
+  height: 200px;
   border-radius: 100%;
 }
 </style>
