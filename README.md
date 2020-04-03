@@ -1,6 +1,30 @@
-# prs
+<h1 align="center">Welcome to Paper. Rock. Scissors</h1>
 
-## Project setup
+![Sample](https://github.com/aaron-beach/PaperRockScissor/blob/master/images/Sample.png)
+
+---
+## Table of contents
+* [Motivation](#motivation)
+* [Technologies](#technologies)
+* [Usage](#usage)
+* [Author](#author)
+
+---
+## Motivation
+This is day 1 of 7 apps in 7 days. I chose to create a simple rock paper scissors game. 
+
+---
+## Technologies
+
+
+Project is created with:
+
+- "vue": "^2.6.11"
+
+---
+## Usage
+
+### Project setup
 ```
 npm install
 ```
@@ -15,15 +39,19 @@ npm run serve
 npm run build
 ```
 
-### Run your unit tests
-```
-npm run test:unit
-```
-
 ### Lints and fixes files
 ```
 npm run lint
 ```
+---
+## Author
 
-### Customize configuration
-See [Configuration Reference](https://cli.vuejs.org/config/).
+👤 **Aaron Beach**
+
+* Website: aaronbeach.dev
+* Github: [@aaron-beach](https://github.com/aaron-beach)
+* LinkedIn: [@arbeach](https://linkedin.com/in/arbeach)
+
+---
+
+
