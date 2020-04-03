@@ -4,15 +4,12 @@
     <h1 class="game-loses">Loses: {{ loses }}</h1>
     <div v-bind:class="active" v-on:click.prevent>
       <button class="rock game-btn" v-on:click="makeActive('rock')">
-        Rock
         <img src="@/assets/rock.png" alt="rock image" class="rock-image" />
       </button>
       <button class="paper game-btn" v-on:click="makeActive('paper')">
-        Paper
         <img src="@/assets/paper.png" alt="paper image" class="paper-image" />
       </button>
       <button class="scissors game-btn" v-on:click="makeActive('scissors')">
-        Scissors
         <img
           src="@/assets/scissors.png"
           alt="scissors image"
@@ -91,6 +88,7 @@ export default {
   width: fit-content;
   outline: none;
   border: none;
+  margin: 15px;
 }
 .rock-image,
 .scissors-image,
